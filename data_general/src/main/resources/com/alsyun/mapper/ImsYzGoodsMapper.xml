@@ -1,0 +1,1082 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.alsyun.mapper.ImsYzGoodsMapper">
+  <resultMap id="BaseResultMap" type="com.alsyun.model.ImsYzGoods">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <id column="is_deleted" jdbcType="TINYINT" property="isDeleted" />
+    <result column="uniacid" jdbcType="INTEGER" property="uniacid" />
+    <result column="brand_id" jdbcType="INTEGER" property="brandId" />
+    <result column="type" jdbcType="BIT" property="type" />
+    <result column="status" jdbcType="BIT" property="status" />
+    <result column="display_order" jdbcType="INTEGER" property="displayOrder" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="thumb" jdbcType="VARCHAR" property="thumb" />
+    <result column="sku" jdbcType="VARCHAR" property="sku" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="goods_sn" jdbcType="VARCHAR" property="goodsSn" />
+    <result column="product_sn" jdbcType="VARCHAR" property="productSn" />
+    <result column="market_price" jdbcType="DECIMAL" property="marketPrice" />
+    <result column="price" jdbcType="DECIMAL" property="price" />
+    <result column="cost_price" jdbcType="DECIMAL" property="costPrice" />
+    <result column="stock" jdbcType="INTEGER" property="stock" />
+    <result column="reduce_stock_method" jdbcType="INTEGER" property="reduceStockMethod" />
+    <result column="show_sales" jdbcType="INTEGER" property="showSales" />
+    <result column="real_sales" jdbcType="INTEGER" property="realSales" />
+    <result column="weight" jdbcType="DECIMAL" property="weight" />
+    <result column="has_option" jdbcType="INTEGER" property="hasOption" />
+    <result column="is_new" jdbcType="BIT" property="isNew" />
+    <result column="is_hot" jdbcType="BIT" property="isHot" />
+    <result column="is_discount" jdbcType="BIT" property="isDiscount" />
+    <result column="is_recommand" jdbcType="BIT" property="isRecommand" />
+    <result column="is_comment" jdbcType="BIT" property="isComment" />
+    <result column="created_at" jdbcType="INTEGER" property="createdAt" />
+    <result column="deleted_at" jdbcType="INTEGER" property="deletedAt" />
+    <result column="updated_at" jdbcType="INTEGER" property="updatedAt" />
+    <result column="comment_num" jdbcType="INTEGER" property="commentNum" />
+    <result column="is_plugin" jdbcType="INTEGER" property="isPlugin" />
+    <result column="plugin_id" jdbcType="INTEGER" property="pluginId" />
+    <result column="virtual_sales" jdbcType="INTEGER" property="virtualSales" />
+    <result column="no_refund" jdbcType="TINYINT" property="noRefund" />
+    <result column="need_address" jdbcType="TINYINT" property="needAddress" />
+    <result column="type2" jdbcType="BIT" property="type2" />
+    <result column="old_id" jdbcType="INTEGER" property="oldId" />
+    <result column="min_limit" jdbcType="REAL" property="minLimit" />
+    <result column="max_limit" jdbcType="REAL" property="maxLimit" />
+    <result column="multiple_limit" jdbcType="REAL" property="multipleLimit" />
+    <result column="is_import" jdbcType="INTEGER" property="isImport" />
+    <result column="volume" jdbcType="DECIMAL" property="volume" />
+    <result column="check_type" jdbcType="INTEGER" property="checkType" />
+    <result column="limit_time" jdbcType="INTEGER" property="limitTime" />
+    <result column="insurance" jdbcType="INTEGER" property="insurance" />
+    <result column="insurance_name" jdbcType="VARCHAR" property="insuranceName" />
+    <result column="insurance_price" jdbcType="DECIMAL" property="insurancePrice" />
+    <result column="appoint" jdbcType="INTEGER" property="appoint" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.alsyun.model.ImsYzGoods">
+    <result column="thumb_url" jdbcType="LONGVARCHAR" property="thumbUrl" />
+    <result column="content" jdbcType="LONGVARCHAR" property="content" />
+    <result column="insurance_info" jdbcType="LONGVARCHAR" property="insuranceInfo" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, is_deleted, uniacid, brand_id, type, status, display_order, title, thumb, sku, 
+    description, goods_sn, product_sn, market_price, price, cost_price, stock, reduce_stock_method, 
+    show_sales, real_sales, weight, has_option, is_new, is_hot, is_discount, is_recommand, 
+    is_comment, created_at, deleted_at, updated_at, comment_num, is_plugin, plugin_id, 
+    virtual_sales, no_refund, need_address, type2, old_id, min_limit, max_limit, multiple_limit, 
+    is_import, volume, check_type, limit_time, insurance, insurance_name, insurance_price, 
+    appoint
+  </sql>
+  <sql id="Blob_Column_List">
+    thumb_url, content, insurance_info
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.alsyun.model.ImsYzGoodsExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from ims_yz_goods
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.alsyun.model.ImsYzGoodsExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from ims_yz_goods
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from ims_yz_goods
+    where id = #{id,jdbcType=INTEGER}
+      and is_deleted = #{isDeleted,jdbcType=TINYINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from ims_yz_goods
+    where id = #{id,jdbcType=INTEGER}
+      and is_deleted = #{isDeleted,jdbcType=TINYINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.alsyun.model.ImsYzGoodsExample">
+    delete from ims_yz_goods
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.alsyun.model.ImsYzGoods">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into ims_yz_goods (is_deleted, uniacid, brand_id, 
+      type, status, display_order, 
+      title, thumb, sku, 
+      description, goods_sn, product_sn, 
+      market_price, price, cost_price, 
+      stock, reduce_stock_method, show_sales, 
+      real_sales, weight, has_option, 
+      is_new, is_hot, is_discount, is_recommand, 
+      is_comment, created_at, deleted_at, 
+      updated_at, comment_num, is_plugin, 
+      plugin_id, virtual_sales, no_refund, 
+      need_address, type2, old_id, 
+      min_limit, max_limit, multiple_limit, 
+      is_import, volume, check_type, 
+      limit_time, insurance, insurance_name, 
+      insurance_price, appoint, thumb_url, 
+      content, insurance_info)
+    values (#{isDeleted,jdbcType=TINYINT}, #{uniacid,jdbcType=INTEGER}, #{brandId,jdbcType=INTEGER}, 
+      #{type,jdbcType=BIT}, #{status,jdbcType=BIT}, #{displayOrder,jdbcType=INTEGER}, 
+      #{title,jdbcType=VARCHAR}, #{thumb,jdbcType=VARCHAR}, #{sku,jdbcType=VARCHAR}, 
+      #{description,jdbcType=VARCHAR}, #{goodsSn,jdbcType=VARCHAR}, #{productSn,jdbcType=VARCHAR}, 
+      #{marketPrice,jdbcType=DECIMAL}, #{price,jdbcType=DECIMAL}, #{costPrice,jdbcType=DECIMAL}, 
+      #{stock,jdbcType=INTEGER}, #{reduceStockMethod,jdbcType=INTEGER}, #{showSales,jdbcType=INTEGER}, 
+      #{realSales,jdbcType=INTEGER}, #{weight,jdbcType=DECIMAL}, #{hasOption,jdbcType=INTEGER}, 
+      #{isNew,jdbcType=BIT}, #{isHot,jdbcType=BIT}, #{isDiscount,jdbcType=BIT}, #{isRecommand,jdbcType=BIT}, 
+      #{isComment,jdbcType=BIT}, #{createdAt,jdbcType=INTEGER}, #{deletedAt,jdbcType=INTEGER}, 
+      #{updatedAt,jdbcType=INTEGER}, #{commentNum,jdbcType=INTEGER}, #{isPlugin,jdbcType=INTEGER}, 
+      #{pluginId,jdbcType=INTEGER}, #{virtualSales,jdbcType=INTEGER}, #{noRefund,jdbcType=TINYINT}, 
+      #{needAddress,jdbcType=TINYINT}, #{type2,jdbcType=BIT}, #{oldId,jdbcType=INTEGER}, 
+      #{minLimit,jdbcType=REAL}, #{maxLimit,jdbcType=REAL}, #{multipleLimit,jdbcType=REAL}, 
+      #{isImport,jdbcType=INTEGER}, #{volume,jdbcType=DECIMAL}, #{checkType,jdbcType=INTEGER}, 
+      #{limitTime,jdbcType=INTEGER}, #{insurance,jdbcType=INTEGER}, #{insuranceName,jdbcType=VARCHAR}, 
+      #{insurancePrice,jdbcType=DECIMAL}, #{appoint,jdbcType=INTEGER}, #{thumbUrl,jdbcType=LONGVARCHAR}, 
+      #{content,jdbcType=LONGVARCHAR}, #{insuranceInfo,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.alsyun.model.ImsYzGoods">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into ims_yz_goods
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="isDeleted != null">
+        is_deleted,
+      </if>
+      <if test="uniacid != null">
+        uniacid,
+      </if>
+      <if test="brandId != null">
+        brand_id,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="displayOrder != null">
+        display_order,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="thumb != null">
+        thumb,
+      </if>
+      <if test="sku != null">
+        sku,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="goodsSn != null">
+        goods_sn,
+      </if>
+      <if test="productSn != null">
+        product_sn,
+      </if>
+      <if test="marketPrice != null">
+        market_price,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="costPrice != null">
+        cost_price,
+      </if>
+      <if test="stock != null">
+        stock,
+      </if>
+      <if test="reduceStockMethod != null">
+        reduce_stock_method,
+      </if>
+      <if test="showSales != null">
+        show_sales,
+      </if>
+      <if test="realSales != null">
+        real_sales,
+      </if>
+      <if test="weight != null">
+        weight,
+      </if>
+      <if test="hasOption != null">
+        has_option,
+      </if>
+      <if test="isNew != null">
+        is_new,
+      </if>
+      <if test="isHot != null">
+        is_hot,
+      </if>
+      <if test="isDiscount != null">
+        is_discount,
+      </if>
+      <if test="isRecommand != null">
+        is_recommand,
+      </if>
+      <if test="isComment != null">
+        is_comment,
+      </if>
+      <if test="createdAt != null">
+        created_at,
+      </if>
+      <if test="deletedAt != null">
+        deleted_at,
+      </if>
+      <if test="updatedAt != null">
+        updated_at,
+      </if>
+      <if test="commentNum != null">
+        comment_num,
+      </if>
+      <if test="isPlugin != null">
+        is_plugin,
+      </if>
+      <if test="pluginId != null">
+        plugin_id,
+      </if>
+      <if test="virtualSales != null">
+        virtual_sales,
+      </if>
+      <if test="noRefund != null">
+        no_refund,
+      </if>
+      <if test="needAddress != null">
+        need_address,
+      </if>
+      <if test="type2 != null">
+        type2,
+      </if>
+      <if test="oldId != null">
+        old_id,
+      </if>
+      <if test="minLimit != null">
+        min_limit,
+      </if>
+      <if test="maxLimit != null">
+        max_limit,
+      </if>
+      <if test="multipleLimit != null">
+        multiple_limit,
+      </if>
+      <if test="isImport != null">
+        is_import,
+      </if>
+      <if test="volume != null">
+        volume,
+      </if>
+      <if test="checkType != null">
+        check_type,
+      </if>
+      <if test="limitTime != null">
+        limit_time,
+      </if>
+      <if test="insurance != null">
+        insurance,
+      </if>
+      <if test="insuranceName != null">
+        insurance_name,
+      </if>
+      <if test="insurancePrice != null">
+        insurance_price,
+      </if>
+      <if test="appoint != null">
+        appoint,
+      </if>
+      <if test="thumbUrl != null">
+        thumb_url,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+      <if test="insuranceInfo != null">
+        insurance_info,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="isDeleted != null">
+        #{isDeleted,jdbcType=TINYINT},
+      </if>
+      <if test="uniacid != null">
+        #{uniacid,jdbcType=INTEGER},
+      </if>
+      <if test="brandId != null">
+        #{brandId,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=BIT},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=BIT},
+      </if>
+      <if test="displayOrder != null">
+        #{displayOrder,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="thumb != null">
+        #{thumb,jdbcType=VARCHAR},
+      </if>
+      <if test="sku != null">
+        #{sku,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsSn != null">
+        #{goodsSn,jdbcType=VARCHAR},
+      </if>
+      <if test="productSn != null">
+        #{productSn,jdbcType=VARCHAR},
+      </if>
+      <if test="marketPrice != null">
+        #{marketPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="costPrice != null">
+        #{costPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="stock != null">
+        #{stock,jdbcType=INTEGER},
+      </if>
+      <if test="reduceStockMethod != null">
+        #{reduceStockMethod,jdbcType=INTEGER},
+      </if>
+      <if test="showSales != null">
+        #{showSales,jdbcType=INTEGER},
+      </if>
+      <if test="realSales != null">
+        #{realSales,jdbcType=INTEGER},
+      </if>
+      <if test="weight != null">
+        #{weight,jdbcType=DECIMAL},
+      </if>
+      <if test="hasOption != null">
+        #{hasOption,jdbcType=INTEGER},
+      </if>
+      <if test="isNew != null">
+        #{isNew,jdbcType=BIT},
+      </if>
+      <if test="isHot != null">
+        #{isHot,jdbcType=BIT},
+      </if>
+      <if test="isDiscount != null">
+        #{isDiscount,jdbcType=BIT},
+      </if>
+      <if test="isRecommand != null">
+        #{isRecommand,jdbcType=BIT},
+      </if>
+      <if test="isComment != null">
+        #{isComment,jdbcType=BIT},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=INTEGER},
+      </if>
+      <if test="deletedAt != null">
+        #{deletedAt,jdbcType=INTEGER},
+      </if>
+      <if test="updatedAt != null">
+        #{updatedAt,jdbcType=INTEGER},
+      </if>
+      <if test="commentNum != null">
+        #{commentNum,jdbcType=INTEGER},
+      </if>
+      <if test="isPlugin != null">
+        #{isPlugin,jdbcType=INTEGER},
+      </if>
+      <if test="pluginId != null">
+        #{pluginId,jdbcType=INTEGER},
+      </if>
+      <if test="virtualSales != null">
+        #{virtualSales,jdbcType=INTEGER},
+      </if>
+      <if test="noRefund != null">
+        #{noRefund,jdbcType=TINYINT},
+      </if>
+      <if test="needAddress != null">
+        #{needAddress,jdbcType=TINYINT},
+      </if>
+      <if test="type2 != null">
+        #{type2,jdbcType=BIT},
+      </if>
+      <if test="oldId != null">
+        #{oldId,jdbcType=INTEGER},
+      </if>
+      <if test="minLimit != null">
+        #{minLimit,jdbcType=REAL},
+      </if>
+      <if test="maxLimit != null">
+        #{maxLimit,jdbcType=REAL},
+      </if>
+      <if test="multipleLimit != null">
+        #{multipleLimit,jdbcType=REAL},
+      </if>
+      <if test="isImport != null">
+        #{isImport,jdbcType=INTEGER},
+      </if>
+      <if test="volume != null">
+        #{volume,jdbcType=DECIMAL},
+      </if>
+      <if test="checkType != null">
+        #{checkType,jdbcType=INTEGER},
+      </if>
+      <if test="limitTime != null">
+        #{limitTime,jdbcType=INTEGER},
+      </if>
+      <if test="insurance != null">
+        #{insurance,jdbcType=INTEGER},
+      </if>
+      <if test="insuranceName != null">
+        #{insuranceName,jdbcType=VARCHAR},
+      </if>
+      <if test="insurancePrice != null">
+        #{insurancePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="appoint != null">
+        #{appoint,jdbcType=INTEGER},
+      </if>
+      <if test="thumbUrl != null">
+        #{thumbUrl,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="insuranceInfo != null">
+        #{insuranceInfo,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.alsyun.model.ImsYzGoodsExample" resultType="java.lang.Long">
+    select count(*) from ims_yz_goods
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update ims_yz_goods
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.isDeleted != null">
+        is_deleted = #{record.isDeleted,jdbcType=TINYINT},
+      </if>
+      <if test="record.uniacid != null">
+        uniacid = #{record.uniacid,jdbcType=INTEGER},
+      </if>
+      <if test="record.brandId != null">
+        brand_id = #{record.brandId,jdbcType=INTEGER},
+      </if>
+      <if test="record.type != null">
+        type = #{record.type,jdbcType=BIT},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=BIT},
+      </if>
+      <if test="record.displayOrder != null">
+        display_order = #{record.displayOrder,jdbcType=INTEGER},
+      </if>
+      <if test="record.title != null">
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.thumb != null">
+        thumb = #{record.thumb,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sku != null">
+        sku = #{record.sku,jdbcType=VARCHAR},
+      </if>
+      <if test="record.description != null">
+        description = #{record.description,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goodsSn != null">
+        goods_sn = #{record.goodsSn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productSn != null">
+        product_sn = #{record.productSn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.marketPrice != null">
+        market_price = #{record.marketPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.price != null">
+        price = #{record.price,jdbcType=DECIMAL},
+      </if>
+      <if test="record.costPrice != null">
+        cost_price = #{record.costPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.stock != null">
+        stock = #{record.stock,jdbcType=INTEGER},
+      </if>
+      <if test="record.reduceStockMethod != null">
+        reduce_stock_method = #{record.reduceStockMethod,jdbcType=INTEGER},
+      </if>
+      <if test="record.showSales != null">
+        show_sales = #{record.showSales,jdbcType=INTEGER},
+      </if>
+      <if test="record.realSales != null">
+        real_sales = #{record.realSales,jdbcType=INTEGER},
+      </if>
+      <if test="record.weight != null">
+        weight = #{record.weight,jdbcType=DECIMAL},
+      </if>
+      <if test="record.hasOption != null">
+        has_option = #{record.hasOption,jdbcType=INTEGER},
+      </if>
+      <if test="record.isNew != null">
+        is_new = #{record.isNew,jdbcType=BIT},
+      </if>
+      <if test="record.isHot != null">
+        is_hot = #{record.isHot,jdbcType=BIT},
+      </if>
+      <if test="record.isDiscount != null">
+        is_discount = #{record.isDiscount,jdbcType=BIT},
+      </if>
+      <if test="record.isRecommand != null">
+        is_recommand = #{record.isRecommand,jdbcType=BIT},
+      </if>
+      <if test="record.isComment != null">
+        is_comment = #{record.isComment,jdbcType=BIT},
+      </if>
+      <if test="record.createdAt != null">
+        created_at = #{record.createdAt,jdbcType=INTEGER},
+      </if>
+      <if test="record.deletedAt != null">
+        deleted_at = #{record.deletedAt,jdbcType=INTEGER},
+      </if>
+      <if test="record.updatedAt != null">
+        updated_at = #{record.updatedAt,jdbcType=INTEGER},
+      </if>
+      <if test="record.commentNum != null">
+        comment_num = #{record.commentNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.isPlugin != null">
+        is_plugin = #{record.isPlugin,jdbcType=INTEGER},
+      </if>
+      <if test="record.pluginId != null">
+        plugin_id = #{record.pluginId,jdbcType=INTEGER},
+      </if>
+      <if test="record.virtualSales != null">
+        virtual_sales = #{record.virtualSales,jdbcType=INTEGER},
+      </if>
+      <if test="record.noRefund != null">
+        no_refund = #{record.noRefund,jdbcType=TINYINT},
+      </if>
+      <if test="record.needAddress != null">
+        need_address = #{record.needAddress,jdbcType=TINYINT},
+      </if>
+      <if test="record.type2 != null">
+        type2 = #{record.type2,jdbcType=BIT},
+      </if>
+      <if test="record.oldId != null">
+        old_id = #{record.oldId,jdbcType=INTEGER},
+      </if>
+      <if test="record.minLimit != null">
+        min_limit = #{record.minLimit,jdbcType=REAL},
+      </if>
+      <if test="record.maxLimit != null">
+        max_limit = #{record.maxLimit,jdbcType=REAL},
+      </if>
+      <if test="record.multipleLimit != null">
+        multiple_limit = #{record.multipleLimit,jdbcType=REAL},
+      </if>
+      <if test="record.isImport != null">
+        is_import = #{record.isImport,jdbcType=INTEGER},
+      </if>
+      <if test="record.volume != null">
+        volume = #{record.volume,jdbcType=DECIMAL},
+      </if>
+      <if test="record.checkType != null">
+        check_type = #{record.checkType,jdbcType=INTEGER},
+      </if>
+      <if test="record.limitTime != null">
+        limit_time = #{record.limitTime,jdbcType=INTEGER},
+      </if>
+      <if test="record.insurance != null">
+        insurance = #{record.insurance,jdbcType=INTEGER},
+      </if>
+      <if test="record.insuranceName != null">
+        insurance_name = #{record.insuranceName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.insurancePrice != null">
+        insurance_price = #{record.insurancePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.appoint != null">
+        appoint = #{record.appoint,jdbcType=INTEGER},
+      </if>
+      <if test="record.thumbUrl != null">
+        thumb_url = #{record.thumbUrl,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.content != null">
+        content = #{record.content,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.insuranceInfo != null">
+        insurance_info = #{record.insuranceInfo,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update ims_yz_goods
+    set id = #{record.id,jdbcType=INTEGER},
+      is_deleted = #{record.isDeleted,jdbcType=TINYINT},
+      uniacid = #{record.uniacid,jdbcType=INTEGER},
+      brand_id = #{record.brandId,jdbcType=INTEGER},
+      type = #{record.type,jdbcType=BIT},
+      status = #{record.status,jdbcType=BIT},
+      display_order = #{record.displayOrder,jdbcType=INTEGER},
+      title = #{record.title,jdbcType=VARCHAR},
+      thumb = #{record.thumb,jdbcType=VARCHAR},
+      sku = #{record.sku,jdbcType=VARCHAR},
+      description = #{record.description,jdbcType=VARCHAR},
+      goods_sn = #{record.goodsSn,jdbcType=VARCHAR},
+      product_sn = #{record.productSn,jdbcType=VARCHAR},
+      market_price = #{record.marketPrice,jdbcType=DECIMAL},
+      price = #{record.price,jdbcType=DECIMAL},
+      cost_price = #{record.costPrice,jdbcType=DECIMAL},
+      stock = #{record.stock,jdbcType=INTEGER},
+      reduce_stock_method = #{record.reduceStockMethod,jdbcType=INTEGER},
+      show_sales = #{record.showSales,jdbcType=INTEGER},
+      real_sales = #{record.realSales,jdbcType=INTEGER},
+      weight = #{record.weight,jdbcType=DECIMAL},
+      has_option = #{record.hasOption,jdbcType=INTEGER},
+      is_new = #{record.isNew,jdbcType=BIT},
+      is_hot = #{record.isHot,jdbcType=BIT},
+      is_discount = #{record.isDiscount,jdbcType=BIT},
+      is_recommand = #{record.isRecommand,jdbcType=BIT},
+      is_comment = #{record.isComment,jdbcType=BIT},
+      created_at = #{record.createdAt,jdbcType=INTEGER},
+      deleted_at = #{record.deletedAt,jdbcType=INTEGER},
+      updated_at = #{record.updatedAt,jdbcType=INTEGER},
+      comment_num = #{record.commentNum,jdbcType=INTEGER},
+      is_plugin = #{record.isPlugin,jdbcType=INTEGER},
+      plugin_id = #{record.pluginId,jdbcType=INTEGER},
+      virtual_sales = #{record.virtualSales,jdbcType=INTEGER},
+      no_refund = #{record.noRefund,jdbcType=TINYINT},
+      need_address = #{record.needAddress,jdbcType=TINYINT},
+      type2 = #{record.type2,jdbcType=BIT},
+      old_id = #{record.oldId,jdbcType=INTEGER},
+      min_limit = #{record.minLimit,jdbcType=REAL},
+      max_limit = #{record.maxLimit,jdbcType=REAL},
+      multiple_limit = #{record.multipleLimit,jdbcType=REAL},
+      is_import = #{record.isImport,jdbcType=INTEGER},
+      volume = #{record.volume,jdbcType=DECIMAL},
+      check_type = #{record.checkType,jdbcType=INTEGER},
+      limit_time = #{record.limitTime,jdbcType=INTEGER},
+      insurance = #{record.insurance,jdbcType=INTEGER},
+      insurance_name = #{record.insuranceName,jdbcType=VARCHAR},
+      insurance_price = #{record.insurancePrice,jdbcType=DECIMAL},
+      appoint = #{record.appoint,jdbcType=INTEGER},
+      thumb_url = #{record.thumbUrl,jdbcType=LONGVARCHAR},
+      content = #{record.content,jdbcType=LONGVARCHAR},
+      insurance_info = #{record.insuranceInfo,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update ims_yz_goods
+    set id = #{record.id,jdbcType=INTEGER},
+      is_deleted = #{record.isDeleted,jdbcType=TINYINT},
+      uniacid = #{record.uniacid,jdbcType=INTEGER},
+      brand_id = #{record.brandId,jdbcType=INTEGER},
+      type = #{record.type,jdbcType=BIT},
+      status = #{record.status,jdbcType=BIT},
+      display_order = #{record.displayOrder,jdbcType=INTEGER},
+      title = #{record.title,jdbcType=VARCHAR},
+      thumb = #{record.thumb,jdbcType=VARCHAR},
+      sku = #{record.sku,jdbcType=VARCHAR},
+      description = #{record.description,jdbcType=VARCHAR},
+      goods_sn = #{record.goodsSn,jdbcType=VARCHAR},
+      product_sn = #{record.productSn,jdbcType=VARCHAR},
+      market_price = #{record.marketPrice,jdbcType=DECIMAL},
+      price = #{record.price,jdbcType=DECIMAL},
+      cost_price = #{record.costPrice,jdbcType=DECIMAL},
+      stock = #{record.stock,jdbcType=INTEGER},
+      reduce_stock_method = #{record.reduceStockMethod,jdbcType=INTEGER},
+      show_sales = #{record.showSales,jdbcType=INTEGER},
+      real_sales = #{record.realSales,jdbcType=INTEGER},
+      weight = #{record.weight,jdbcType=DECIMAL},
+      has_option = #{record.hasOption,jdbcType=INTEGER},
+      is_new = #{record.isNew,jdbcType=BIT},
+      is_hot = #{record.isHot,jdbcType=BIT},
+      is_discount = #{record.isDiscount,jdbcType=BIT},
+      is_recommand = #{record.isRecommand,jdbcType=BIT},
+      is_comment = #{record.isComment,jdbcType=BIT},
+      created_at = #{record.createdAt,jdbcType=INTEGER},
+      deleted_at = #{record.deletedAt,jdbcType=INTEGER},
+      updated_at = #{record.updatedAt,jdbcType=INTEGER},
+      comment_num = #{record.commentNum,jdbcType=INTEGER},
+      is_plugin = #{record.isPlugin,jdbcType=INTEGER},
+      plugin_id = #{record.pluginId,jdbcType=INTEGER},
+      virtual_sales = #{record.virtualSales,jdbcType=INTEGER},
+      no_refund = #{record.noRefund,jdbcType=TINYINT},
+      need_address = #{record.needAddress,jdbcType=TINYINT},
+      type2 = #{record.type2,jdbcType=BIT},
+      old_id = #{record.oldId,jdbcType=INTEGER},
+      min_limit = #{record.minLimit,jdbcType=REAL},
+      max_limit = #{record.maxLimit,jdbcType=REAL},
+      multiple_limit = #{record.multipleLimit,jdbcType=REAL},
+      is_import = #{record.isImport,jdbcType=INTEGER},
+      volume = #{record.volume,jdbcType=DECIMAL},
+      check_type = #{record.checkType,jdbcType=INTEGER},
+      limit_time = #{record.limitTime,jdbcType=INTEGER},
+      insurance = #{record.insurance,jdbcType=INTEGER},
+      insurance_name = #{record.insuranceName,jdbcType=VARCHAR},
+      insurance_price = #{record.insurancePrice,jdbcType=DECIMAL},
+      appoint = #{record.appoint,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.alsyun.model.ImsYzGoods">
+    update ims_yz_goods
+    <set>
+      <if test="uniacid != null">
+        uniacid = #{uniacid,jdbcType=INTEGER},
+      </if>
+      <if test="brandId != null">
+        brand_id = #{brandId,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=BIT},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=BIT},
+      </if>
+      <if test="displayOrder != null">
+        display_order = #{displayOrder,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="thumb != null">
+        thumb = #{thumb,jdbcType=VARCHAR},
+      </if>
+      <if test="sku != null">
+        sku = #{sku,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsSn != null">
+        goods_sn = #{goodsSn,jdbcType=VARCHAR},
+      </if>
+      <if test="productSn != null">
+        product_sn = #{productSn,jdbcType=VARCHAR},
+      </if>
+      <if test="marketPrice != null">
+        market_price = #{marketPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="costPrice != null">
+        cost_price = #{costPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="stock != null">
+        stock = #{stock,jdbcType=INTEGER},
+      </if>
+      <if test="reduceStockMethod != null">
+        reduce_stock_method = #{reduceStockMethod,jdbcType=INTEGER},
+      </if>
+      <if test="showSales != null">
+        show_sales = #{showSales,jdbcType=INTEGER},
+      </if>
+      <if test="realSales != null">
+        real_sales = #{realSales,jdbcType=INTEGER},
+      </if>
+      <if test="weight != null">
+        weight = #{weight,jdbcType=DECIMAL},
+      </if>
+      <if test="hasOption != null">
+        has_option = #{hasOption,jdbcType=INTEGER},
+      </if>
+      <if test="isNew != null">
+        is_new = #{isNew,jdbcType=BIT},
+      </if>
+      <if test="isHot != null">
+        is_hot = #{isHot,jdbcType=BIT},
+      </if>
+      <if test="isDiscount != null">
+        is_discount = #{isDiscount,jdbcType=BIT},
+      </if>
+      <if test="isRecommand != null">
+        is_recommand = #{isRecommand,jdbcType=BIT},
+      </if>
+      <if test="isComment != null">
+        is_comment = #{isComment,jdbcType=BIT},
+      </if>
+      <if test="createdAt != null">
+        created_at = #{createdAt,jdbcType=INTEGER},
+      </if>
+      <if test="deletedAt != null">
+        deleted_at = #{deletedAt,jdbcType=INTEGER},
+      </if>
+      <if test="updatedAt != null">
+        updated_at = #{updatedAt,jdbcType=INTEGER},
+      </if>
+      <if test="commentNum != null">
+        comment_num = #{commentNum,jdbcType=INTEGER},
+      </if>
+      <if test="isPlugin != null">
+        is_plugin = #{isPlugin,jdbcType=INTEGER},
+      </if>
+      <if test="pluginId != null">
+        plugin_id = #{pluginId,jdbcType=INTEGER},
+      </if>
+      <if test="virtualSales != null">
+        virtual_sales = #{virtualSales,jdbcType=INTEGER},
+      </if>
+      <if test="noRefund != null">
+        no_refund = #{noRefund,jdbcType=TINYINT},
+      </if>
+      <if test="needAddress != null">
+        need_address = #{needAddress,jdbcType=TINYINT},
+      </if>
+      <if test="type2 != null">
+        type2 = #{type2,jdbcType=BIT},
+      </if>
+      <if test="oldId != null">
+        old_id = #{oldId,jdbcType=INTEGER},
+      </if>
+      <if test="minLimit != null">
+        min_limit = #{minLimit,jdbcType=REAL},
+      </if>
+      <if test="maxLimit != null">
+        max_limit = #{maxLimit,jdbcType=REAL},
+      </if>
+      <if test="multipleLimit != null">
+        multiple_limit = #{multipleLimit,jdbcType=REAL},
+      </if>
+      <if test="isImport != null">
+        is_import = #{isImport,jdbcType=INTEGER},
+      </if>
+      <if test="volume != null">
+        volume = #{volume,jdbcType=DECIMAL},
+      </if>
+      <if test="checkType != null">
+        check_type = #{checkType,jdbcType=INTEGER},
+      </if>
+      <if test="limitTime != null">
+        limit_time = #{limitTime,jdbcType=INTEGER},
+      </if>
+      <if test="insurance != null">
+        insurance = #{insurance,jdbcType=INTEGER},
+      </if>
+      <if test="insuranceName != null">
+        insurance_name = #{insuranceName,jdbcType=VARCHAR},
+      </if>
+      <if test="insurancePrice != null">
+        insurance_price = #{insurancePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="appoint != null">
+        appoint = #{appoint,jdbcType=INTEGER},
+      </if>
+      <if test="thumbUrl != null">
+        thumb_url = #{thumbUrl,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="insuranceInfo != null">
+        insurance_info = #{insuranceInfo,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+      and is_deleted = #{isDeleted,jdbcType=TINYINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.alsyun.model.ImsYzGoods">
+    update ims_yz_goods
+    set uniacid = #{uniacid,jdbcType=INTEGER},
+      brand_id = #{brandId,jdbcType=INTEGER},
+      type = #{type,jdbcType=BIT},
+      status = #{status,jdbcType=BIT},
+      display_order = #{displayOrder,jdbcType=INTEGER},
+      title = #{title,jdbcType=VARCHAR},
+      thumb = #{thumb,jdbcType=VARCHAR},
+      sku = #{sku,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      goods_sn = #{goodsSn,jdbcType=VARCHAR},
+      product_sn = #{productSn,jdbcType=VARCHAR},
+      market_price = #{marketPrice,jdbcType=DECIMAL},
+      price = #{price,jdbcType=DECIMAL},
+      cost_price = #{costPrice,jdbcType=DECIMAL},
+      stock = #{stock,jdbcType=INTEGER},
+      reduce_stock_method = #{reduceStockMethod,jdbcType=INTEGER},
+      show_sales = #{showSales,jdbcType=INTEGER},
+      real_sales = #{realSales,jdbcType=INTEGER},
+      weight = #{weight,jdbcType=DECIMAL},
+      has_option = #{hasOption,jdbcType=INTEGER},
+      is_new = #{isNew,jdbcType=BIT},
+      is_hot = #{isHot,jdbcType=BIT},
+      is_discount = #{isDiscount,jdbcType=BIT},
+      is_recommand = #{isRecommand,jdbcType=BIT},
+      is_comment = #{isComment,jdbcType=BIT},
+      created_at = #{createdAt,jdbcType=INTEGER},
+      deleted_at = #{deletedAt,jdbcType=INTEGER},
+      updated_at = #{updatedAt,jdbcType=INTEGER},
+      comment_num = #{commentNum,jdbcType=INTEGER},
+      is_plugin = #{isPlugin,jdbcType=INTEGER},
+      plugin_id = #{pluginId,jdbcType=INTEGER},
+      virtual_sales = #{virtualSales,jdbcType=INTEGER},
+      no_refund = #{noRefund,jdbcType=TINYINT},
+      need_address = #{needAddress,jdbcType=TINYINT},
+      type2 = #{type2,jdbcType=BIT},
+      old_id = #{oldId,jdbcType=INTEGER},
+      min_limit = #{minLimit,jdbcType=REAL},
+      max_limit = #{maxLimit,jdbcType=REAL},
+      multiple_limit = #{multipleLimit,jdbcType=REAL},
+      is_import = #{isImport,jdbcType=INTEGER},
+      volume = #{volume,jdbcType=DECIMAL},
+      check_type = #{checkType,jdbcType=INTEGER},
+      limit_time = #{limitTime,jdbcType=INTEGER},
+      insurance = #{insurance,jdbcType=INTEGER},
+      insurance_name = #{insuranceName,jdbcType=VARCHAR},
+      insurance_price = #{insurancePrice,jdbcType=DECIMAL},
+      appoint = #{appoint,jdbcType=INTEGER},
+      thumb_url = #{thumbUrl,jdbcType=LONGVARCHAR},
+      content = #{content,jdbcType=LONGVARCHAR},
+      insurance_info = #{insuranceInfo,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+      and is_deleted = #{isDeleted,jdbcType=TINYINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.alsyun.model.ImsYzGoods">
+    update ims_yz_goods
+    set uniacid = #{uniacid,jdbcType=INTEGER},
+      brand_id = #{brandId,jdbcType=INTEGER},
+      type = #{type,jdbcType=BIT},
+      status = #{status,jdbcType=BIT},
+      display_order = #{displayOrder,jdbcType=INTEGER},
+      title = #{title,jdbcType=VARCHAR},
+      thumb = #{thumb,jdbcType=VARCHAR},
+      sku = #{sku,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      goods_sn = #{goodsSn,jdbcType=VARCHAR},
+      product_sn = #{productSn,jdbcType=VARCHAR},
+      market_price = #{marketPrice,jdbcType=DECIMAL},
+      price = #{price,jdbcType=DECIMAL},
+      cost_price = #{costPrice,jdbcType=DECIMAL},
+      stock = #{stock,jdbcType=INTEGER},
+      reduce_stock_method = #{reduceStockMethod,jdbcType=INTEGER},
+      show_sales = #{showSales,jdbcType=INTEGER},
+      real_sales = #{realSales,jdbcType=INTEGER},
+      weight = #{weight,jdbcType=DECIMAL},
+      has_option = #{hasOption,jdbcType=INTEGER},
+      is_new = #{isNew,jdbcType=BIT},
+      is_hot = #{isHot,jdbcType=BIT},
+      is_discount = #{isDiscount,jdbcType=BIT},
+      is_recommand = #{isRecommand,jdbcType=BIT},
+      is_comment = #{isComment,jdbcType=BIT},
+      created_at = #{createdAt,jdbcType=INTEGER},
+      deleted_at = #{deletedAt,jdbcType=INTEGER},
+      updated_at = #{updatedAt,jdbcType=INTEGER},
+      comment_num = #{commentNum,jdbcType=INTEGER},
+      is_plugin = #{isPlugin,jdbcType=INTEGER},
+      plugin_id = #{pluginId,jdbcType=INTEGER},
+      virtual_sales = #{virtualSales,jdbcType=INTEGER},
+      no_refund = #{noRefund,jdbcType=TINYINT},
+      need_address = #{needAddress,jdbcType=TINYINT},
+      type2 = #{type2,jdbcType=BIT},
+      old_id = #{oldId,jdbcType=INTEGER},
+      min_limit = #{minLimit,jdbcType=REAL},
+      max_limit = #{maxLimit,jdbcType=REAL},
+      multiple_limit = #{multipleLimit,jdbcType=REAL},
+      is_import = #{isImport,jdbcType=INTEGER},
+      volume = #{volume,jdbcType=DECIMAL},
+      check_type = #{checkType,jdbcType=INTEGER},
+      limit_time = #{limitTime,jdbcType=INTEGER},
+      insurance = #{insurance,jdbcType=INTEGER},
+      insurance_name = #{insuranceName,jdbcType=VARCHAR},
+      insurance_price = #{insurancePrice,jdbcType=DECIMAL},
+      appoint = #{appoint,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+      and is_deleted = #{isDeleted,jdbcType=TINYINT}
+  </update>
+</mapper>

@@ -1,0 +1,26 @@
+server:
+  port: 10002
+  servlet:
+    context-path: /${spring.application.name}
+spring:
+  security:
+    user:
+      name: 'root'
+      password: 'root'
+  boot:
+    admin:
+      client:
+        url: http://localhost:9999/
+
+#开放端点提供服务健康监控
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: ALWAYS
+
+
+

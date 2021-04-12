@@ -1,0 +1,448 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.alsyun.mapper.DstMemberUserMapper">
+  <resultMap id="BaseResultMap" type="com.alsyun.model.DstMemberUser">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="phonenumber" jdbcType="VARCHAR" property="phonenumber" />
+    <result column="authenticate" jdbcType="VARCHAR" property="authenticate" />
+    <result column="corpor_img_one" jdbcType="VARCHAR" property="corporImgOne" />
+    <result column="corpor_img_two" jdbcType="VARCHAR" property="corporImgTwo" />
+    <result column="credit_img" jdbcType="VARCHAR" property="creditImg" />
+    <result column="commission" jdbcType="VARCHAR" property="commission" />
+    <result column="remainder" jdbcType="VARCHAR" property="remainder" />
+    <result column="user_type" jdbcType="VARCHAR" property="userType" />
+    <result column="del_flag" jdbcType="VARCHAR" property="delFlag" />
+    <result column="examine" jdbcType="VARCHAR" property="examine" />
+    <result column="roster_type" jdbcType="VARCHAR" property="rosterType" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="update_by" jdbcType="VARCHAR" property="updateBy" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, user_id, user_name, password, phonenumber, authenticate, corpor_img_one, corpor_img_two, 
+    credit_img, commission, remainder, user_type, del_flag, examine, roster_type, create_by, 
+    create_time, remark, update_by, update_time
+  </sql>
+  <select id="selectByExample" parameterType="com.alsyun.model.DstMemberUserExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from dst_member_user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from dst_member_user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from dst_member_user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.alsyun.model.DstMemberUserExample">
+    delete from dst_member_user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.alsyun.model.DstMemberUser">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into dst_member_user (user_id, user_name, password, 
+      phonenumber, authenticate, corpor_img_one, 
+      corpor_img_two, credit_img, commission, 
+      remainder, user_type, del_flag, 
+      examine, roster_type, create_by, 
+      create_time, remark, update_by, 
+      update_time)
+    values (#{userId,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{phonenumber,jdbcType=VARCHAR}, #{authenticate,jdbcType=VARCHAR}, #{corporImgOne,jdbcType=VARCHAR}, 
+      #{corporImgTwo,jdbcType=VARCHAR}, #{creditImg,jdbcType=VARCHAR}, #{commission,jdbcType=VARCHAR}, 
+      #{remainder,jdbcType=VARCHAR}, #{userType,jdbcType=VARCHAR}, #{delFlag,jdbcType=VARCHAR}, 
+      #{examine,jdbcType=VARCHAR}, #{rosterType,jdbcType=VARCHAR}, #{createBy,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR}, #{updateBy,jdbcType=VARCHAR}, 
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.alsyun.model.DstMemberUser">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into dst_member_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="userName != null">
+        user_name,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="phonenumber != null">
+        phonenumber,
+      </if>
+      <if test="authenticate != null">
+        authenticate,
+      </if>
+      <if test="corporImgOne != null">
+        corpor_img_one,
+      </if>
+      <if test="corporImgTwo != null">
+        corpor_img_two,
+      </if>
+      <if test="creditImg != null">
+        credit_img,
+      </if>
+      <if test="commission != null">
+        commission,
+      </if>
+      <if test="remainder != null">
+        remainder,
+      </if>
+      <if test="userType != null">
+        user_type,
+      </if>
+      <if test="delFlag != null">
+        del_flag,
+      </if>
+      <if test="examine != null">
+        examine,
+      </if>
+      <if test="rosterType != null">
+        roster_type,
+      </if>
+      <if test="createBy != null">
+        create_by,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="updateBy != null">
+        update_by,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="phonenumber != null">
+        #{phonenumber,jdbcType=VARCHAR},
+      </if>
+      <if test="authenticate != null">
+        #{authenticate,jdbcType=VARCHAR},
+      </if>
+      <if test="corporImgOne != null">
+        #{corporImgOne,jdbcType=VARCHAR},
+      </if>
+      <if test="corporImgTwo != null">
+        #{corporImgTwo,jdbcType=VARCHAR},
+      </if>
+      <if test="creditImg != null">
+        #{creditImg,jdbcType=VARCHAR},
+      </if>
+      <if test="commission != null">
+        #{commission,jdbcType=VARCHAR},
+      </if>
+      <if test="remainder != null">
+        #{remainder,jdbcType=VARCHAR},
+      </if>
+      <if test="userType != null">
+        #{userType,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null">
+        #{delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="examine != null">
+        #{examine,jdbcType=VARCHAR},
+      </if>
+      <if test="rosterType != null">
+        #{rosterType,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="updateBy != null">
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.alsyun.model.DstMemberUserExample" resultType="java.lang.Long">
+    select count(*) from dst_member_user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update dst_member_user
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.userId != null">
+        user_id = #{record.userId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userName != null">
+        user_name = #{record.userName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.password != null">
+        password = #{record.password,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phonenumber != null">
+        phonenumber = #{record.phonenumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.authenticate != null">
+        authenticate = #{record.authenticate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.corporImgOne != null">
+        corpor_img_one = #{record.corporImgOne,jdbcType=VARCHAR},
+      </if>
+      <if test="record.corporImgTwo != null">
+        corpor_img_two = #{record.corporImgTwo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creditImg != null">
+        credit_img = #{record.creditImg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.commission != null">
+        commission = #{record.commission,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remainder != null">
+        remainder = #{record.remainder,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userType != null">
+        user_type = #{record.userType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.delFlag != null">
+        del_flag = #{record.delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.examine != null">
+        examine = #{record.examine,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rosterType != null">
+        roster_type = #{record.rosterType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createBy != null">
+        create_by = #{record.createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.remark != null">
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateBy != null">
+        update_by = #{record.updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update dst_member_user
+    set id = #{record.id,jdbcType=INTEGER},
+      user_id = #{record.userId,jdbcType=VARCHAR},
+      user_name = #{record.userName,jdbcType=VARCHAR},
+      password = #{record.password,jdbcType=VARCHAR},
+      phonenumber = #{record.phonenumber,jdbcType=VARCHAR},
+      authenticate = #{record.authenticate,jdbcType=VARCHAR},
+      corpor_img_one = #{record.corporImgOne,jdbcType=VARCHAR},
+      corpor_img_two = #{record.corporImgTwo,jdbcType=VARCHAR},
+      credit_img = #{record.creditImg,jdbcType=VARCHAR},
+      commission = #{record.commission,jdbcType=VARCHAR},
+      remainder = #{record.remainder,jdbcType=VARCHAR},
+      user_type = #{record.userType,jdbcType=VARCHAR},
+      del_flag = #{record.delFlag,jdbcType=VARCHAR},
+      examine = #{record.examine,jdbcType=VARCHAR},
+      roster_type = #{record.rosterType,jdbcType=VARCHAR},
+      create_by = #{record.createBy,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      update_by = #{record.updateBy,jdbcType=VARCHAR},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.alsyun.model.DstMemberUser">
+    update dst_member_user
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="phonenumber != null">
+        phonenumber = #{phonenumber,jdbcType=VARCHAR},
+      </if>
+      <if test="authenticate != null">
+        authenticate = #{authenticate,jdbcType=VARCHAR},
+      </if>
+      <if test="corporImgOne != null">
+        corpor_img_one = #{corporImgOne,jdbcType=VARCHAR},
+      </if>
+      <if test="corporImgTwo != null">
+        corpor_img_two = #{corporImgTwo,jdbcType=VARCHAR},
+      </if>
+      <if test="creditImg != null">
+        credit_img = #{creditImg,jdbcType=VARCHAR},
+      </if>
+      <if test="commission != null">
+        commission = #{commission,jdbcType=VARCHAR},
+      </if>
+      <if test="remainder != null">
+        remainder = #{remainder,jdbcType=VARCHAR},
+      </if>
+      <if test="userType != null">
+        user_type = #{userType,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null">
+        del_flag = #{delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="examine != null">
+        examine = #{examine,jdbcType=VARCHAR},
+      </if>
+      <if test="rosterType != null">
+        roster_type = #{rosterType,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null">
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="updateBy != null">
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.alsyun.model.DstMemberUser">
+    update dst_member_user
+    set user_id = #{userId,jdbcType=VARCHAR},
+      user_name = #{userName,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      phonenumber = #{phonenumber,jdbcType=VARCHAR},
+      authenticate = #{authenticate,jdbcType=VARCHAR},
+      corpor_img_one = #{corporImgOne,jdbcType=VARCHAR},
+      corpor_img_two = #{corporImgTwo,jdbcType=VARCHAR},
+      credit_img = #{creditImg,jdbcType=VARCHAR},
+      commission = #{commission,jdbcType=VARCHAR},
+      remainder = #{remainder,jdbcType=VARCHAR},
+      user_type = #{userType,jdbcType=VARCHAR},
+      del_flag = #{delFlag,jdbcType=VARCHAR},
+      examine = #{examine,jdbcType=VARCHAR},
+      roster_type = #{rosterType,jdbcType=VARCHAR},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      remark = #{remark,jdbcType=VARCHAR},
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

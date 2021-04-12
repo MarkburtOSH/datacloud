@@ -1,0 +1,718 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.alsyun.mapper.ImsYzOrderGoodsMapper">
+  <resultMap id="BaseResultMap" type="com.alsyun.model.ImsYzOrderGoods">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="uniacid" jdbcType="INTEGER" property="uniacid" />
+    <result column="order_id" jdbcType="INTEGER" property="orderId" />
+    <result column="goods_id" jdbcType="INTEGER" property="goodsId" />
+    <result column="pay_sn" jdbcType="VARCHAR" property="paySn" />
+    <result column="total" jdbcType="INTEGER" property="total" />
+    <result column="create_at" jdbcType="INTEGER" property="createAt" />
+    <result column="price" jdbcType="DECIMAL" property="price" />
+    <result column="goods_sn" jdbcType="VARCHAR" property="goodsSn" />
+    <result column="uid" jdbcType="INTEGER" property="uid" />
+    <result column="thumb" jdbcType="VARCHAR" property="thumb" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="goods_price" jdbcType="DECIMAL" property="goodsPrice" />
+    <result column="goods_option_id" jdbcType="INTEGER" property="goodsOptionId" />
+    <result column="goods_option_title" jdbcType="VARCHAR" property="goodsOptionTitle" />
+    <result column="product_sn" jdbcType="VARCHAR" property="productSn" />
+    <result column="created_at" jdbcType="INTEGER" property="createdAt" />
+    <result column="updated_at" jdbcType="INTEGER" property="updatedAt" />
+    <result column="discount_price" jdbcType="DECIMAL" property="discountPrice" />
+    <result column="comment_status" jdbcType="TINYINT" property="commentStatus" />
+    <result column="change_price" jdbcType="DECIMAL" property="changePrice" />
+    <result column="comment_id" jdbcType="INTEGER" property="commentId" />
+    <result column="goods_market_price" jdbcType="DECIMAL" property="goodsMarketPrice" />
+    <result column="goods_cost_price" jdbcType="DECIMAL" property="goodsCostPrice" />
+    <result column="vip_price" jdbcType="DECIMAL" property="vipPrice" />
+    <result column="coupon_price" jdbcType="DECIMAL" property="couponPrice" />
+    <result column="payment_amount" jdbcType="DECIMAL" property="paymentAmount" />
+    <result column="deduction_amount" jdbcType="DECIMAL" property="deductionAmount" />
+    <result column="need_address" jdbcType="TINYINT" property="needAddress" />
+    <result column="is_import" jdbcType="INTEGER" property="isImport" />
+    <result column="play_time" jdbcType="INTEGER" property="playTime" />
+    <result column="start_time" jdbcType="INTEGER" property="startTime" />
+    <result column="lend_items" jdbcType="VARCHAR" property="lendItems" />
+    <result column="spend_time" jdbcType="INTEGER" property="spendTime" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="order_express_id" jdbcType="INTEGER" property="orderExpressId" />
+    <result column="appointment" jdbcType="VARCHAR" property="appointment" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, uniacid, order_id, goods_id, pay_sn, total, create_at, price, goods_sn, uid, 
+    thumb, title, goods_price, goods_option_id, goods_option_title, product_sn, created_at, 
+    updated_at, discount_price, comment_status, change_price, comment_id, goods_market_price, 
+    goods_cost_price, vip_price, coupon_price, payment_amount, deduction_amount, need_address, 
+    is_import, play_time, start_time, lend_items, spend_time, status, order_express_id, 
+    appointment
+  </sql>
+  <select id="selectByExample" parameterType="com.alsyun.model.ImsYzOrderGoodsExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from ims_yz_order_goods
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ims_yz_order_goods
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from ims_yz_order_goods
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.alsyun.model.ImsYzOrderGoodsExample">
+    delete from ims_yz_order_goods
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.alsyun.model.ImsYzOrderGoods">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into ims_yz_order_goods (uniacid, order_id, goods_id, 
+      pay_sn, total, create_at, 
+      price, goods_sn, uid, 
+      thumb, title, goods_price, 
+      goods_option_id, goods_option_title, product_sn, 
+      created_at, updated_at, discount_price, 
+      comment_status, change_price, comment_id, 
+      goods_market_price, goods_cost_price, vip_price, 
+      coupon_price, payment_amount, deduction_amount, 
+      need_address, is_import, play_time, 
+      start_time, lend_items, spend_time, 
+      status, order_express_id, appointment
+      )
+    values (#{uniacid,jdbcType=INTEGER}, #{orderId,jdbcType=INTEGER}, #{goodsId,jdbcType=INTEGER}, 
+      #{paySn,jdbcType=VARCHAR}, #{total,jdbcType=INTEGER}, #{createAt,jdbcType=INTEGER}, 
+      #{price,jdbcType=DECIMAL}, #{goodsSn,jdbcType=VARCHAR}, #{uid,jdbcType=INTEGER}, 
+      #{thumb,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{goodsPrice,jdbcType=DECIMAL}, 
+      #{goodsOptionId,jdbcType=INTEGER}, #{goodsOptionTitle,jdbcType=VARCHAR}, #{productSn,jdbcType=VARCHAR}, 
+      #{createdAt,jdbcType=INTEGER}, #{updatedAt,jdbcType=INTEGER}, #{discountPrice,jdbcType=DECIMAL}, 
+      #{commentStatus,jdbcType=TINYINT}, #{changePrice,jdbcType=DECIMAL}, #{commentId,jdbcType=INTEGER}, 
+      #{goodsMarketPrice,jdbcType=DECIMAL}, #{goodsCostPrice,jdbcType=DECIMAL}, #{vipPrice,jdbcType=DECIMAL}, 
+      #{couponPrice,jdbcType=DECIMAL}, #{paymentAmount,jdbcType=DECIMAL}, #{deductionAmount,jdbcType=DECIMAL}, 
+      #{needAddress,jdbcType=TINYINT}, #{isImport,jdbcType=INTEGER}, #{playTime,jdbcType=INTEGER}, 
+      #{startTime,jdbcType=INTEGER}, #{lendItems,jdbcType=VARCHAR}, #{spendTime,jdbcType=INTEGER}, 
+      #{status,jdbcType=INTEGER}, #{orderExpressId,jdbcType=INTEGER}, #{appointment,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.alsyun.model.ImsYzOrderGoods">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into ims_yz_order_goods
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="uniacid != null">
+        uniacid,
+      </if>
+      <if test="orderId != null">
+        order_id,
+      </if>
+      <if test="goodsId != null">
+        goods_id,
+      </if>
+      <if test="paySn != null">
+        pay_sn,
+      </if>
+      <if test="total != null">
+        total,
+      </if>
+      <if test="createAt != null">
+        create_at,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="goodsSn != null">
+        goods_sn,
+      </if>
+      <if test="uid != null">
+        uid,
+      </if>
+      <if test="thumb != null">
+        thumb,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="goodsPrice != null">
+        goods_price,
+      </if>
+      <if test="goodsOptionId != null">
+        goods_option_id,
+      </if>
+      <if test="goodsOptionTitle != null">
+        goods_option_title,
+      </if>
+      <if test="productSn != null">
+        product_sn,
+      </if>
+      <if test="createdAt != null">
+        created_at,
+      </if>
+      <if test="updatedAt != null">
+        updated_at,
+      </if>
+      <if test="discountPrice != null">
+        discount_price,
+      </if>
+      <if test="commentStatus != null">
+        comment_status,
+      </if>
+      <if test="changePrice != null">
+        change_price,
+      </if>
+      <if test="commentId != null">
+        comment_id,
+      </if>
+      <if test="goodsMarketPrice != null">
+        goods_market_price,
+      </if>
+      <if test="goodsCostPrice != null">
+        goods_cost_price,
+      </if>
+      <if test="vipPrice != null">
+        vip_price,
+      </if>
+      <if test="couponPrice != null">
+        coupon_price,
+      </if>
+      <if test="paymentAmount != null">
+        payment_amount,
+      </if>
+      <if test="deductionAmount != null">
+        deduction_amount,
+      </if>
+      <if test="needAddress != null">
+        need_address,
+      </if>
+      <if test="isImport != null">
+        is_import,
+      </if>
+      <if test="playTime != null">
+        play_time,
+      </if>
+      <if test="startTime != null">
+        start_time,
+      </if>
+      <if test="lendItems != null">
+        lend_items,
+      </if>
+      <if test="spendTime != null">
+        spend_time,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="orderExpressId != null">
+        order_express_id,
+      </if>
+      <if test="appointment != null">
+        appointment,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="uniacid != null">
+        #{uniacid,jdbcType=INTEGER},
+      </if>
+      <if test="orderId != null">
+        #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="goodsId != null">
+        #{goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="paySn != null">
+        #{paySn,jdbcType=VARCHAR},
+      </if>
+      <if test="total != null">
+        #{total,jdbcType=INTEGER},
+      </if>
+      <if test="createAt != null">
+        #{createAt,jdbcType=INTEGER},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsSn != null">
+        #{goodsSn,jdbcType=VARCHAR},
+      </if>
+      <if test="uid != null">
+        #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="thumb != null">
+        #{thumb,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsPrice != null">
+        #{goodsPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsOptionId != null">
+        #{goodsOptionId,jdbcType=INTEGER},
+      </if>
+      <if test="goodsOptionTitle != null">
+        #{goodsOptionTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="productSn != null">
+        #{productSn,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=INTEGER},
+      </if>
+      <if test="updatedAt != null">
+        #{updatedAt,jdbcType=INTEGER},
+      </if>
+      <if test="discountPrice != null">
+        #{discountPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="commentStatus != null">
+        #{commentStatus,jdbcType=TINYINT},
+      </if>
+      <if test="changePrice != null">
+        #{changePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="commentId != null">
+        #{commentId,jdbcType=INTEGER},
+      </if>
+      <if test="goodsMarketPrice != null">
+        #{goodsMarketPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsCostPrice != null">
+        #{goodsCostPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="vipPrice != null">
+        #{vipPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="couponPrice != null">
+        #{couponPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="paymentAmount != null">
+        #{paymentAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="deductionAmount != null">
+        #{deductionAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="needAddress != null">
+        #{needAddress,jdbcType=TINYINT},
+      </if>
+      <if test="isImport != null">
+        #{isImport,jdbcType=INTEGER},
+      </if>
+      <if test="playTime != null">
+        #{playTime,jdbcType=INTEGER},
+      </if>
+      <if test="startTime != null">
+        #{startTime,jdbcType=INTEGER},
+      </if>
+      <if test="lendItems != null">
+        #{lendItems,jdbcType=VARCHAR},
+      </if>
+      <if test="spendTime != null">
+        #{spendTime,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="orderExpressId != null">
+        #{orderExpressId,jdbcType=INTEGER},
+      </if>
+      <if test="appointment != null">
+        #{appointment,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.alsyun.model.ImsYzOrderGoodsExample" resultType="java.lang.Long">
+    select count(*) from ims_yz_order_goods
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update ims_yz_order_goods
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.uniacid != null">
+        uniacid = #{record.uniacid,jdbcType=INTEGER},
+      </if>
+      <if test="record.orderId != null">
+        order_id = #{record.orderId,jdbcType=INTEGER},
+      </if>
+      <if test="record.goodsId != null">
+        goods_id = #{record.goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="record.paySn != null">
+        pay_sn = #{record.paySn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.total != null">
+        total = #{record.total,jdbcType=INTEGER},
+      </if>
+      <if test="record.createAt != null">
+        create_at = #{record.createAt,jdbcType=INTEGER},
+      </if>
+      <if test="record.price != null">
+        price = #{record.price,jdbcType=DECIMAL},
+      </if>
+      <if test="record.goodsSn != null">
+        goods_sn = #{record.goodsSn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uid != null">
+        uid = #{record.uid,jdbcType=INTEGER},
+      </if>
+      <if test="record.thumb != null">
+        thumb = #{record.thumb,jdbcType=VARCHAR},
+      </if>
+      <if test="record.title != null">
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goodsPrice != null">
+        goods_price = #{record.goodsPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.goodsOptionId != null">
+        goods_option_id = #{record.goodsOptionId,jdbcType=INTEGER},
+      </if>
+      <if test="record.goodsOptionTitle != null">
+        goods_option_title = #{record.goodsOptionTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productSn != null">
+        product_sn = #{record.productSn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createdAt != null">
+        created_at = #{record.createdAt,jdbcType=INTEGER},
+      </if>
+      <if test="record.updatedAt != null">
+        updated_at = #{record.updatedAt,jdbcType=INTEGER},
+      </if>
+      <if test="record.discountPrice != null">
+        discount_price = #{record.discountPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.commentStatus != null">
+        comment_status = #{record.commentStatus,jdbcType=TINYINT},
+      </if>
+      <if test="record.changePrice != null">
+        change_price = #{record.changePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.commentId != null">
+        comment_id = #{record.commentId,jdbcType=INTEGER},
+      </if>
+      <if test="record.goodsMarketPrice != null">
+        goods_market_price = #{record.goodsMarketPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.goodsCostPrice != null">
+        goods_cost_price = #{record.goodsCostPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.vipPrice != null">
+        vip_price = #{record.vipPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.couponPrice != null">
+        coupon_price = #{record.couponPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.paymentAmount != null">
+        payment_amount = #{record.paymentAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.deductionAmount != null">
+        deduction_amount = #{record.deductionAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.needAddress != null">
+        need_address = #{record.needAddress,jdbcType=TINYINT},
+      </if>
+      <if test="record.isImport != null">
+        is_import = #{record.isImport,jdbcType=INTEGER},
+      </if>
+      <if test="record.playTime != null">
+        play_time = #{record.playTime,jdbcType=INTEGER},
+      </if>
+      <if test="record.startTime != null">
+        start_time = #{record.startTime,jdbcType=INTEGER},
+      </if>
+      <if test="record.lendItems != null">
+        lend_items = #{record.lendItems,jdbcType=VARCHAR},
+      </if>
+      <if test="record.spendTime != null">
+        spend_time = #{record.spendTime,jdbcType=INTEGER},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.orderExpressId != null">
+        order_express_id = #{record.orderExpressId,jdbcType=INTEGER},
+      </if>
+      <if test="record.appointment != null">
+        appointment = #{record.appointment,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update ims_yz_order_goods
+    set id = #{record.id,jdbcType=INTEGER},
+      uniacid = #{record.uniacid,jdbcType=INTEGER},
+      order_id = #{record.orderId,jdbcType=INTEGER},
+      goods_id = #{record.goodsId,jdbcType=INTEGER},
+      pay_sn = #{record.paySn,jdbcType=VARCHAR},
+      total = #{record.total,jdbcType=INTEGER},
+      create_at = #{record.createAt,jdbcType=INTEGER},
+      price = #{record.price,jdbcType=DECIMAL},
+      goods_sn = #{record.goodsSn,jdbcType=VARCHAR},
+      uid = #{record.uid,jdbcType=INTEGER},
+      thumb = #{record.thumb,jdbcType=VARCHAR},
+      title = #{record.title,jdbcType=VARCHAR},
+      goods_price = #{record.goodsPrice,jdbcType=DECIMAL},
+      goods_option_id = #{record.goodsOptionId,jdbcType=INTEGER},
+      goods_option_title = #{record.goodsOptionTitle,jdbcType=VARCHAR},
+      product_sn = #{record.productSn,jdbcType=VARCHAR},
+      created_at = #{record.createdAt,jdbcType=INTEGER},
+      updated_at = #{record.updatedAt,jdbcType=INTEGER},
+      discount_price = #{record.discountPrice,jdbcType=DECIMAL},
+      comment_status = #{record.commentStatus,jdbcType=TINYINT},
+      change_price = #{record.changePrice,jdbcType=DECIMAL},
+      comment_id = #{record.commentId,jdbcType=INTEGER},
+      goods_market_price = #{record.goodsMarketPrice,jdbcType=DECIMAL},
+      goods_cost_price = #{record.goodsCostPrice,jdbcType=DECIMAL},
+      vip_price = #{record.vipPrice,jdbcType=DECIMAL},
+      coupon_price = #{record.couponPrice,jdbcType=DECIMAL},
+      payment_amount = #{record.paymentAmount,jdbcType=DECIMAL},
+      deduction_amount = #{record.deductionAmount,jdbcType=DECIMAL},
+      need_address = #{record.needAddress,jdbcType=TINYINT},
+      is_import = #{record.isImport,jdbcType=INTEGER},
+      play_time = #{record.playTime,jdbcType=INTEGER},
+      start_time = #{record.startTime,jdbcType=INTEGER},
+      lend_items = #{record.lendItems,jdbcType=VARCHAR},
+      spend_time = #{record.spendTime,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=INTEGER},
+      order_express_id = #{record.orderExpressId,jdbcType=INTEGER},
+      appointment = #{record.appointment,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.alsyun.model.ImsYzOrderGoods">
+    update ims_yz_order_goods
+    <set>
+      <if test="uniacid != null">
+        uniacid = #{uniacid,jdbcType=INTEGER},
+      </if>
+      <if test="orderId != null">
+        order_id = #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="goodsId != null">
+        goods_id = #{goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="paySn != null">
+        pay_sn = #{paySn,jdbcType=VARCHAR},
+      </if>
+      <if test="total != null">
+        total = #{total,jdbcType=INTEGER},
+      </if>
+      <if test="createAt != null">
+        create_at = #{createAt,jdbcType=INTEGER},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsSn != null">
+        goods_sn = #{goodsSn,jdbcType=VARCHAR},
+      </if>
+      <if test="uid != null">
+        uid = #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="thumb != null">
+        thumb = #{thumb,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsPrice != null">
+        goods_price = #{goodsPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsOptionId != null">
+        goods_option_id = #{goodsOptionId,jdbcType=INTEGER},
+      </if>
+      <if test="goodsOptionTitle != null">
+        goods_option_title = #{goodsOptionTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="productSn != null">
+        product_sn = #{productSn,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        created_at = #{createdAt,jdbcType=INTEGER},
+      </if>
+      <if test="updatedAt != null">
+        updated_at = #{updatedAt,jdbcType=INTEGER},
+      </if>
+      <if test="discountPrice != null">
+        discount_price = #{discountPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="commentStatus != null">
+        comment_status = #{commentStatus,jdbcType=TINYINT},
+      </if>
+      <if test="changePrice != null">
+        change_price = #{changePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="commentId != null">
+        comment_id = #{commentId,jdbcType=INTEGER},
+      </if>
+      <if test="goodsMarketPrice != null">
+        goods_market_price = #{goodsMarketPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsCostPrice != null">
+        goods_cost_price = #{goodsCostPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="vipPrice != null">
+        vip_price = #{vipPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="couponPrice != null">
+        coupon_price = #{couponPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="paymentAmount != null">
+        payment_amount = #{paymentAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="deductionAmount != null">
+        deduction_amount = #{deductionAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="needAddress != null">
+        need_address = #{needAddress,jdbcType=TINYINT},
+      </if>
+      <if test="isImport != null">
+        is_import = #{isImport,jdbcType=INTEGER},
+      </if>
+      <if test="playTime != null">
+        play_time = #{playTime,jdbcType=INTEGER},
+      </if>
+      <if test="startTime != null">
+        start_time = #{startTime,jdbcType=INTEGER},
+      </if>
+      <if test="lendItems != null">
+        lend_items = #{lendItems,jdbcType=VARCHAR},
+      </if>
+      <if test="spendTime != null">
+        spend_time = #{spendTime,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="orderExpressId != null">
+        order_express_id = #{orderExpressId,jdbcType=INTEGER},
+      </if>
+      <if test="appointment != null">
+        appointment = #{appointment,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.alsyun.model.ImsYzOrderGoods">
+    update ims_yz_order_goods
+    set uniacid = #{uniacid,jdbcType=INTEGER},
+      order_id = #{orderId,jdbcType=INTEGER},
+      goods_id = #{goodsId,jdbcType=INTEGER},
+      pay_sn = #{paySn,jdbcType=VARCHAR},
+      total = #{total,jdbcType=INTEGER},
+      create_at = #{createAt,jdbcType=INTEGER},
+      price = #{price,jdbcType=DECIMAL},
+      goods_sn = #{goodsSn,jdbcType=VARCHAR},
+      uid = #{uid,jdbcType=INTEGER},
+      thumb = #{thumb,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      goods_price = #{goodsPrice,jdbcType=DECIMAL},
+      goods_option_id = #{goodsOptionId,jdbcType=INTEGER},
+      goods_option_title = #{goodsOptionTitle,jdbcType=VARCHAR},
+      product_sn = #{productSn,jdbcType=VARCHAR},
+      created_at = #{createdAt,jdbcType=INTEGER},
+      updated_at = #{updatedAt,jdbcType=INTEGER},
+      discount_price = #{discountPrice,jdbcType=DECIMAL},
+      comment_status = #{commentStatus,jdbcType=TINYINT},
+      change_price = #{changePrice,jdbcType=DECIMAL},
+      comment_id = #{commentId,jdbcType=INTEGER},
+      goods_market_price = #{goodsMarketPrice,jdbcType=DECIMAL},
+      goods_cost_price = #{goodsCostPrice,jdbcType=DECIMAL},
+      vip_price = #{vipPrice,jdbcType=DECIMAL},
+      coupon_price = #{couponPrice,jdbcType=DECIMAL},
+      payment_amount = #{paymentAmount,jdbcType=DECIMAL},
+      deduction_amount = #{deductionAmount,jdbcType=DECIMAL},
+      need_address = #{needAddress,jdbcType=TINYINT},
+      is_import = #{isImport,jdbcType=INTEGER},
+      play_time = #{playTime,jdbcType=INTEGER},
+      start_time = #{startTime,jdbcType=INTEGER},
+      lend_items = #{lendItems,jdbcType=VARCHAR},
+      spend_time = #{spendTime,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      order_express_id = #{orderExpressId,jdbcType=INTEGER},
+      appointment = #{appointment,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

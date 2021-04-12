@@ -1,0 +1,12 @@
+spring:
+  profiles:
+    active:
+  application:
+    name: data-admin
+  cloud:
+    nacos:
+      config:
+        server-addr: http://localhost:8848
+        file-extension: yaml
+      discovery:
+        server-addr: http://localhost:8848

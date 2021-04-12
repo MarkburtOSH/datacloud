@@ -1,0 +1,463 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.alsyun.mapper.DstAmountManMapper">
+  <resultMap id="BaseResultMap" type="com.alsyun.model.DstAmountMan">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="odd_Numbers" jdbcType="VARCHAR" property="oddNumbers" />
+    <result column="account_id" jdbcType="INTEGER" property="accountId" />
+    <result column="account_name" jdbcType="VARCHAR" property="accountName" />
+    <result column="amount" jdbcType="VARCHAR" property="amount" />
+    <result column="unit" jdbcType="VARCHAR" property="unit" />
+    <result column="amount_money" jdbcType="VARCHAR" property="amountMoney" />
+    <result column="payment_by" jdbcType="VARCHAR" property="paymentBy" />
+    <result column="payment_account" jdbcType="VARCHAR" property="paymentAccount" />
+    <result column="collection_by" jdbcType="VARCHAR" property="collectionBy" />
+    <result column="collection_account" jdbcType="VARCHAR" property="collectionAccount" />
+    <result column="commission" jdbcType="VARCHAR" property="commission" />
+    <result column="balance" jdbcType="VARCHAR" property="balance" />
+    <result column="payment_method" jdbcType="VARCHAR" property="paymentMethod" />
+    <result column="trade_state" jdbcType="VARCHAR" property="tradeState" />
+    <result column="in_out_mode" jdbcType="VARCHAR" property="inOutMode" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="update_by" jdbcType="VARCHAR" property="updateBy" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, odd_Numbers, account_id, account_name, amount, unit, amount_money, payment_by, 
+    payment_account, collection_by, collection_account, commission, balance, payment_method, 
+    trade_state, in_out_mode, create_by, create_time, remark, update_by, update_time
+  </sql>
+  <select id="selectByExample" parameterType="com.alsyun.model.DstAmountManExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from dst_amount_man
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from dst_amount_man
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from dst_amount_man
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.alsyun.model.DstAmountManExample">
+    delete from dst_amount_man
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.alsyun.model.DstAmountMan">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into dst_amount_man (odd_Numbers, account_id, account_name, 
+      amount, unit, amount_money, 
+      payment_by, payment_account, collection_by, 
+      collection_account, commission, balance, 
+      payment_method, trade_state, in_out_mode, 
+      create_by, create_time, remark, 
+      update_by, update_time)
+    values (#{oddNumbers,jdbcType=VARCHAR}, #{accountId,jdbcType=INTEGER}, #{accountName,jdbcType=VARCHAR}, 
+      #{amount,jdbcType=VARCHAR}, #{unit,jdbcType=VARCHAR}, #{amountMoney,jdbcType=VARCHAR}, 
+      #{paymentBy,jdbcType=VARCHAR}, #{paymentAccount,jdbcType=VARCHAR}, #{collectionBy,jdbcType=VARCHAR}, 
+      #{collectionAccount,jdbcType=VARCHAR}, #{commission,jdbcType=VARCHAR}, #{balance,jdbcType=VARCHAR}, 
+      #{paymentMethod,jdbcType=VARCHAR}, #{tradeState,jdbcType=VARCHAR}, #{inOutMode,jdbcType=VARCHAR}, 
+      #{createBy,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR}, 
+      #{updateBy,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.alsyun.model.DstAmountMan">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into dst_amount_man
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="oddNumbers != null">
+        odd_Numbers,
+      </if>
+      <if test="accountId != null">
+        account_id,
+      </if>
+      <if test="accountName != null">
+        account_name,
+      </if>
+      <if test="amount != null">
+        amount,
+      </if>
+      <if test="unit != null">
+        unit,
+      </if>
+      <if test="amountMoney != null">
+        amount_money,
+      </if>
+      <if test="paymentBy != null">
+        payment_by,
+      </if>
+      <if test="paymentAccount != null">
+        payment_account,
+      </if>
+      <if test="collectionBy != null">
+        collection_by,
+      </if>
+      <if test="collectionAccount != null">
+        collection_account,
+      </if>
+      <if test="commission != null">
+        commission,
+      </if>
+      <if test="balance != null">
+        balance,
+      </if>
+      <if test="paymentMethod != null">
+        payment_method,
+      </if>
+      <if test="tradeState != null">
+        trade_state,
+      </if>
+      <if test="inOutMode != null">
+        in_out_mode,
+      </if>
+      <if test="createBy != null">
+        create_by,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="updateBy != null">
+        update_by,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="oddNumbers != null">
+        #{oddNumbers,jdbcType=VARCHAR},
+      </if>
+      <if test="accountId != null">
+        #{accountId,jdbcType=INTEGER},
+      </if>
+      <if test="accountName != null">
+        #{accountName,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null">
+        #{amount,jdbcType=VARCHAR},
+      </if>
+      <if test="unit != null">
+        #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="amountMoney != null">
+        #{amountMoney,jdbcType=VARCHAR},
+      </if>
+      <if test="paymentBy != null">
+        #{paymentBy,jdbcType=VARCHAR},
+      </if>
+      <if test="paymentAccount != null">
+        #{paymentAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="collectionBy != null">
+        #{collectionBy,jdbcType=VARCHAR},
+      </if>
+      <if test="collectionAccount != null">
+        #{collectionAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="commission != null">
+        #{commission,jdbcType=VARCHAR},
+      </if>
+      <if test="balance != null">
+        #{balance,jdbcType=VARCHAR},
+      </if>
+      <if test="paymentMethod != null">
+        #{paymentMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeState != null">
+        #{tradeState,jdbcType=VARCHAR},
+      </if>
+      <if test="inOutMode != null">
+        #{inOutMode,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="updateBy != null">
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.alsyun.model.DstAmountManExample" resultType="java.lang.Long">
+    select count(*) from dst_amount_man
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update dst_amount_man
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.oddNumbers != null">
+        odd_Numbers = #{record.oddNumbers,jdbcType=VARCHAR},
+      </if>
+      <if test="record.accountId != null">
+        account_id = #{record.accountId,jdbcType=INTEGER},
+      </if>
+      <if test="record.accountName != null">
+        account_name = #{record.accountName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.amount != null">
+        amount = #{record.amount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unit != null">
+        unit = #{record.unit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.amountMoney != null">
+        amount_money = #{record.amountMoney,jdbcType=VARCHAR},
+      </if>
+      <if test="record.paymentBy != null">
+        payment_by = #{record.paymentBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.paymentAccount != null">
+        payment_account = #{record.paymentAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.collectionBy != null">
+        collection_by = #{record.collectionBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.collectionAccount != null">
+        collection_account = #{record.collectionAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.commission != null">
+        commission = #{record.commission,jdbcType=VARCHAR},
+      </if>
+      <if test="record.balance != null">
+        balance = #{record.balance,jdbcType=VARCHAR},
+      </if>
+      <if test="record.paymentMethod != null">
+        payment_method = #{record.paymentMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tradeState != null">
+        trade_state = #{record.tradeState,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inOutMode != null">
+        in_out_mode = #{record.inOutMode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createBy != null">
+        create_by = #{record.createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.remark != null">
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateBy != null">
+        update_by = #{record.updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update dst_amount_man
+    set id = #{record.id,jdbcType=INTEGER},
+      odd_Numbers = #{record.oddNumbers,jdbcType=VARCHAR},
+      account_id = #{record.accountId,jdbcType=INTEGER},
+      account_name = #{record.accountName,jdbcType=VARCHAR},
+      amount = #{record.amount,jdbcType=VARCHAR},
+      unit = #{record.unit,jdbcType=VARCHAR},
+      amount_money = #{record.amountMoney,jdbcType=VARCHAR},
+      payment_by = #{record.paymentBy,jdbcType=VARCHAR},
+      payment_account = #{record.paymentAccount,jdbcType=VARCHAR},
+      collection_by = #{record.collectionBy,jdbcType=VARCHAR},
+      collection_account = #{record.collectionAccount,jdbcType=VARCHAR},
+      commission = #{record.commission,jdbcType=VARCHAR},
+      balance = #{record.balance,jdbcType=VARCHAR},
+      payment_method = #{record.paymentMethod,jdbcType=VARCHAR},
+      trade_state = #{record.tradeState,jdbcType=VARCHAR},
+      in_out_mode = #{record.inOutMode,jdbcType=VARCHAR},
+      create_by = #{record.createBy,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      update_by = #{record.updateBy,jdbcType=VARCHAR},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.alsyun.model.DstAmountMan">
+    update dst_amount_man
+    <set>
+      <if test="oddNumbers != null">
+        odd_Numbers = #{oddNumbers,jdbcType=VARCHAR},
+      </if>
+      <if test="accountId != null">
+        account_id = #{accountId,jdbcType=INTEGER},
+      </if>
+      <if test="accountName != null">
+        account_name = #{accountName,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null">
+        amount = #{amount,jdbcType=VARCHAR},
+      </if>
+      <if test="unit != null">
+        unit = #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="amountMoney != null">
+        amount_money = #{amountMoney,jdbcType=VARCHAR},
+      </if>
+      <if test="paymentBy != null">
+        payment_by = #{paymentBy,jdbcType=VARCHAR},
+      </if>
+      <if test="paymentAccount != null">
+        payment_account = #{paymentAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="collectionBy != null">
+        collection_by = #{collectionBy,jdbcType=VARCHAR},
+      </if>
+      <if test="collectionAccount != null">
+        collection_account = #{collectionAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="commission != null">
+        commission = #{commission,jdbcType=VARCHAR},
+      </if>
+      <if test="balance != null">
+        balance = #{balance,jdbcType=VARCHAR},
+      </if>
+      <if test="paymentMethod != null">
+        payment_method = #{paymentMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeState != null">
+        trade_state = #{tradeState,jdbcType=VARCHAR},
+      </if>
+      <if test="inOutMode != null">
+        in_out_mode = #{inOutMode,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null">
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="updateBy != null">
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.alsyun.model.DstAmountMan">
+    update dst_amount_man
+    set odd_Numbers = #{oddNumbers,jdbcType=VARCHAR},
+      account_id = #{accountId,jdbcType=INTEGER},
+      account_name = #{accountName,jdbcType=VARCHAR},
+      amount = #{amount,jdbcType=VARCHAR},
+      unit = #{unit,jdbcType=VARCHAR},
+      amount_money = #{amountMoney,jdbcType=VARCHAR},
+      payment_by = #{paymentBy,jdbcType=VARCHAR},
+      payment_account = #{paymentAccount,jdbcType=VARCHAR},
+      collection_by = #{collectionBy,jdbcType=VARCHAR},
+      collection_account = #{collectionAccount,jdbcType=VARCHAR},
+      commission = #{commission,jdbcType=VARCHAR},
+      balance = #{balance,jdbcType=VARCHAR},
+      payment_method = #{paymentMethod,jdbcType=VARCHAR},
+      trade_state = #{tradeState,jdbcType=VARCHAR},
+      in_out_mode = #{inOutMode,jdbcType=VARCHAR},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      remark = #{remark,jdbcType=VARCHAR},
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

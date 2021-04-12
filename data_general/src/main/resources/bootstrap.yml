@@ -1,0 +1,14 @@
+spring:
+  profiles:
+    active:
+  application:
+    name: data-general
+  cloud:
+    nacos:
+      config:
+        server-addr: http://localhost:8848
+        file-extension: yaml
+      discovery:
+        server-addr: http://localhost:8848
+        metadata:
+          management.context-path: /${spring.application.name}/actuator

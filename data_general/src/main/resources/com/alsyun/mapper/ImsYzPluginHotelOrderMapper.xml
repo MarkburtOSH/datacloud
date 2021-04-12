@@ -1,0 +1,401 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.alsyun.mapper.ImsYzPluginHotelOrderMapper">
+  <resultMap id="BaseResultMap" type="com.alsyun.model.ImsYzPluginHotelOrder">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="order_id" jdbcType="INTEGER" property="orderId" />
+    <result column="hotel_id" jdbcType="INTEGER" property="hotelId" />
+    <result column="has_withdraw" jdbcType="TINYINT" property="hasWithdraw" />
+    <result column="has_settlement" jdbcType="TINYINT" property="hasSettlement" />
+    <result column="settlement_days" jdbcType="DECIMAL" property="settlementDays" />
+    <result column="amount" jdbcType="DECIMAL" property="amount" />
+    <result column="fee" jdbcType="DECIMAL" property="fee" />
+    <result column="fee_percentage" jdbcType="DECIMAL" property="feePercentage" />
+    <result column="verification_clerk_id" jdbcType="INTEGER" property="verificationClerkId" />
+    <result column="pay_type_id" jdbcType="INTEGER" property="payTypeId" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="enter_at" jdbcType="INTEGER" property="enterAt" />
+    <result column="leave_at" jdbcType="INTEGER" property="leaveAt" />
+    <result column="updated_at" jdbcType="INTEGER" property="updatedAt" />
+    <result column="created_at" jdbcType="INTEGER" property="createdAt" />
+    <result column="deleted_at" jdbcType="INTEGER" property="deletedAt" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, order_id, hotel_id, has_withdraw, has_settlement, settlement_days, amount, fee, 
+    fee_percentage, verification_clerk_id, pay_type_id, status, enter_at, leave_at, updated_at, 
+    created_at, deleted_at
+  </sql>
+  <select id="selectByExample" parameterType="com.alsyun.model.ImsYzPluginHotelOrderExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from ims_yz_plugin_hotel_order
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ims_yz_plugin_hotel_order
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from ims_yz_plugin_hotel_order
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.alsyun.model.ImsYzPluginHotelOrderExample">
+    delete from ims_yz_plugin_hotel_order
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.alsyun.model.ImsYzPluginHotelOrder">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into ims_yz_plugin_hotel_order (order_id, hotel_id, has_withdraw, 
+      has_settlement, settlement_days, amount, 
+      fee, fee_percentage, verification_clerk_id, 
+      pay_type_id, status, enter_at, 
+      leave_at, updated_at, created_at, 
+      deleted_at)
+    values (#{orderId,jdbcType=INTEGER}, #{hotelId,jdbcType=INTEGER}, #{hasWithdraw,jdbcType=TINYINT}, 
+      #{hasSettlement,jdbcType=TINYINT}, #{settlementDays,jdbcType=DECIMAL}, #{amount,jdbcType=DECIMAL}, 
+      #{fee,jdbcType=DECIMAL}, #{feePercentage,jdbcType=DECIMAL}, #{verificationClerkId,jdbcType=INTEGER}, 
+      #{payTypeId,jdbcType=INTEGER}, #{status,jdbcType=TINYINT}, #{enterAt,jdbcType=INTEGER}, 
+      #{leaveAt,jdbcType=INTEGER}, #{updatedAt,jdbcType=INTEGER}, #{createdAt,jdbcType=INTEGER}, 
+      #{deletedAt,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.alsyun.model.ImsYzPluginHotelOrder">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into ims_yz_plugin_hotel_order
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="orderId != null">
+        order_id,
+      </if>
+      <if test="hotelId != null">
+        hotel_id,
+      </if>
+      <if test="hasWithdraw != null">
+        has_withdraw,
+      </if>
+      <if test="hasSettlement != null">
+        has_settlement,
+      </if>
+      <if test="settlementDays != null">
+        settlement_days,
+      </if>
+      <if test="amount != null">
+        amount,
+      </if>
+      <if test="fee != null">
+        fee,
+      </if>
+      <if test="feePercentage != null">
+        fee_percentage,
+      </if>
+      <if test="verificationClerkId != null">
+        verification_clerk_id,
+      </if>
+      <if test="payTypeId != null">
+        pay_type_id,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="enterAt != null">
+        enter_at,
+      </if>
+      <if test="leaveAt != null">
+        leave_at,
+      </if>
+      <if test="updatedAt != null">
+        updated_at,
+      </if>
+      <if test="createdAt != null">
+        created_at,
+      </if>
+      <if test="deletedAt != null">
+        deleted_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="orderId != null">
+        #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="hotelId != null">
+        #{hotelId,jdbcType=INTEGER},
+      </if>
+      <if test="hasWithdraw != null">
+        #{hasWithdraw,jdbcType=TINYINT},
+      </if>
+      <if test="hasSettlement != null">
+        #{hasSettlement,jdbcType=TINYINT},
+      </if>
+      <if test="settlementDays != null">
+        #{settlementDays,jdbcType=DECIMAL},
+      </if>
+      <if test="amount != null">
+        #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="fee != null">
+        #{fee,jdbcType=DECIMAL},
+      </if>
+      <if test="feePercentage != null">
+        #{feePercentage,jdbcType=DECIMAL},
+      </if>
+      <if test="verificationClerkId != null">
+        #{verificationClerkId,jdbcType=INTEGER},
+      </if>
+      <if test="payTypeId != null">
+        #{payTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="enterAt != null">
+        #{enterAt,jdbcType=INTEGER},
+      </if>
+      <if test="leaveAt != null">
+        #{leaveAt,jdbcType=INTEGER},
+      </if>
+      <if test="updatedAt != null">
+        #{updatedAt,jdbcType=INTEGER},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=INTEGER},
+      </if>
+      <if test="deletedAt != null">
+        #{deletedAt,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.alsyun.model.ImsYzPluginHotelOrderExample" resultType="java.lang.Long">
+    select count(*) from ims_yz_plugin_hotel_order
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update ims_yz_plugin_hotel_order
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.orderId != null">
+        order_id = #{record.orderId,jdbcType=INTEGER},
+      </if>
+      <if test="record.hotelId != null">
+        hotel_id = #{record.hotelId,jdbcType=INTEGER},
+      </if>
+      <if test="record.hasWithdraw != null">
+        has_withdraw = #{record.hasWithdraw,jdbcType=TINYINT},
+      </if>
+      <if test="record.hasSettlement != null">
+        has_settlement = #{record.hasSettlement,jdbcType=TINYINT},
+      </if>
+      <if test="record.settlementDays != null">
+        settlement_days = #{record.settlementDays,jdbcType=DECIMAL},
+      </if>
+      <if test="record.amount != null">
+        amount = #{record.amount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.fee != null">
+        fee = #{record.fee,jdbcType=DECIMAL},
+      </if>
+      <if test="record.feePercentage != null">
+        fee_percentage = #{record.feePercentage,jdbcType=DECIMAL},
+      </if>
+      <if test="record.verificationClerkId != null">
+        verification_clerk_id = #{record.verificationClerkId,jdbcType=INTEGER},
+      </if>
+      <if test="record.payTypeId != null">
+        pay_type_id = #{record.payTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=TINYINT},
+      </if>
+      <if test="record.enterAt != null">
+        enter_at = #{record.enterAt,jdbcType=INTEGER},
+      </if>
+      <if test="record.leaveAt != null">
+        leave_at = #{record.leaveAt,jdbcType=INTEGER},
+      </if>
+      <if test="record.updatedAt != null">
+        updated_at = #{record.updatedAt,jdbcType=INTEGER},
+      </if>
+      <if test="record.createdAt != null">
+        created_at = #{record.createdAt,jdbcType=INTEGER},
+      </if>
+      <if test="record.deletedAt != null">
+        deleted_at = #{record.deletedAt,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update ims_yz_plugin_hotel_order
+    set id = #{record.id,jdbcType=INTEGER},
+      order_id = #{record.orderId,jdbcType=INTEGER},
+      hotel_id = #{record.hotelId,jdbcType=INTEGER},
+      has_withdraw = #{record.hasWithdraw,jdbcType=TINYINT},
+      has_settlement = #{record.hasSettlement,jdbcType=TINYINT},
+      settlement_days = #{record.settlementDays,jdbcType=DECIMAL},
+      amount = #{record.amount,jdbcType=DECIMAL},
+      fee = #{record.fee,jdbcType=DECIMAL},
+      fee_percentage = #{record.feePercentage,jdbcType=DECIMAL},
+      verification_clerk_id = #{record.verificationClerkId,jdbcType=INTEGER},
+      pay_type_id = #{record.payTypeId,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=TINYINT},
+      enter_at = #{record.enterAt,jdbcType=INTEGER},
+      leave_at = #{record.leaveAt,jdbcType=INTEGER},
+      updated_at = #{record.updatedAt,jdbcType=INTEGER},
+      created_at = #{record.createdAt,jdbcType=INTEGER},
+      deleted_at = #{record.deletedAt,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.alsyun.model.ImsYzPluginHotelOrder">
+    update ims_yz_plugin_hotel_order
+    <set>
+      <if test="orderId != null">
+        order_id = #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="hotelId != null">
+        hotel_id = #{hotelId,jdbcType=INTEGER},
+      </if>
+      <if test="hasWithdraw != null">
+        has_withdraw = #{hasWithdraw,jdbcType=TINYINT},
+      </if>
+      <if test="hasSettlement != null">
+        has_settlement = #{hasSettlement,jdbcType=TINYINT},
+      </if>
+      <if test="settlementDays != null">
+        settlement_days = #{settlementDays,jdbcType=DECIMAL},
+      </if>
+      <if test="amount != null">
+        amount = #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="fee != null">
+        fee = #{fee,jdbcType=DECIMAL},
+      </if>
+      <if test="feePercentage != null">
+        fee_percentage = #{feePercentage,jdbcType=DECIMAL},
+      </if>
+      <if test="verificationClerkId != null">
+        verification_clerk_id = #{verificationClerkId,jdbcType=INTEGER},
+      </if>
+      <if test="payTypeId != null">
+        pay_type_id = #{payTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="enterAt != null">
+        enter_at = #{enterAt,jdbcType=INTEGER},
+      </if>
+      <if test="leaveAt != null">
+        leave_at = #{leaveAt,jdbcType=INTEGER},
+      </if>
+      <if test="updatedAt != null">
+        updated_at = #{updatedAt,jdbcType=INTEGER},
+      </if>
+      <if test="createdAt != null">
+        created_at = #{createdAt,jdbcType=INTEGER},
+      </if>
+      <if test="deletedAt != null">
+        deleted_at = #{deletedAt,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.alsyun.model.ImsYzPluginHotelOrder">
+    update ims_yz_plugin_hotel_order
+    set order_id = #{orderId,jdbcType=INTEGER},
+      hotel_id = #{hotelId,jdbcType=INTEGER},
+      has_withdraw = #{hasWithdraw,jdbcType=TINYINT},
+      has_settlement = #{hasSettlement,jdbcType=TINYINT},
+      settlement_days = #{settlementDays,jdbcType=DECIMAL},
+      amount = #{amount,jdbcType=DECIMAL},
+      fee = #{fee,jdbcType=DECIMAL},
+      fee_percentage = #{feePercentage,jdbcType=DECIMAL},
+      verification_clerk_id = #{verificationClerkId,jdbcType=INTEGER},
+      pay_type_id = #{payTypeId,jdbcType=INTEGER},
+      status = #{status,jdbcType=TINYINT},
+      enter_at = #{enterAt,jdbcType=INTEGER},
+      leave_at = #{leaveAt,jdbcType=INTEGER},
+      updated_at = #{updatedAt,jdbcType=INTEGER},
+      created_at = #{createdAt,jdbcType=INTEGER},
+      deleted_at = #{deletedAt,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
